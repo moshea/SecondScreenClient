@@ -21,6 +21,7 @@ import com.example.secondscreenclient.R;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 
 public class Server {
@@ -59,8 +60,7 @@ public class Server {
 	
 	private Uri.Builder getBuilder(){
 		builder = new Uri.Builder();
-		builder.scheme("http");
-		builder.authority(r.getString(R.string.server_url));
+		builder = Uri.parse(r.getString(R.string.server_url)).buildUpon();
 		return builder;
 	}
 	
