@@ -1,11 +1,11 @@
 package com.example.secondscreenclient.model;
 
 import com.example.secondscreenclient.R;
+import com.example.secondscreenclient.requests.PostUser;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 public class User {
@@ -31,14 +31,8 @@ public class User {
 		
 		if(!preferences.contains("application_id")){
 			Log.d(TAG, "No application id stored - getting new one");
-			Server server = new Server(context);
-			String new_app_id = server.getApplicationId();
-			Log.d(TAG, "app id from server: " + new_app_id);
-			
-			SharedPreferences.Editor editor = preferences.edit();
-			editor.putString("application_id", new_app_id);
-			editor.commit();
-			application_id = new_app_id;
+			new PostUser(context).execute();
+			application_id = null;
 		}else{
 			application_id = preferences.getString("application_id", "");
 			Log.d(TAG, "app id from perfs: " + application_id);

@@ -15,8 +15,9 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
     	Log.d(TAG, "Starting app...");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         User user = new User(this);
+        
+        setContentView(R.layout.activity_main);
         user.getApplicationId();
     }
 
