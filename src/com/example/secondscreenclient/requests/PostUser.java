@@ -32,6 +32,10 @@ public class PostUser extends AsyncTask<Void, Void, String> {
 	protected String doInBackground(Void...voids) {
 		AndroidPhone phone = new AndroidPhone(context);
 		Server server = new Server(context);
+		ArrayList<String> pathList = new ArrayList<String>();
+		pathList.add(context.getString(R.string.api_users));
+		
+		
 		/* to get an application id, we need to pass the server a unique identifier
 		 * the server doesn't demand it, as some phones may not return it
 		 * but it will help identify users
@@ -43,7 +47,7 @@ public class PostUser extends AsyncTask<Void, Void, String> {
 		nameValuePairs.add(new BasicNameValuePair("make", phone.getMake()));
 		nameValuePairs.add(new BasicNameValuePair("model", phone.getModel()));
 		
-		return server.postRequest(R.string.api_users, nameValuePairs);
+		return server.postRequest(pathList, nameValuePairs);
 	}
 	
 	/*
@@ -51,15 +55,14 @@ public class PostUser extends AsyncTask<Void, Void, String> {
 	 * application id. Store this locally, so we can use it elsewhere
 	 */
 	protected void onPostExecute(String response){
-		Log.d(TAG, "Server response: " + response);
-		UserResponse userResponse = new Gson().fromJson(response, UserResponse.class);
+		UserData userData = new Gson().fromJson(response, UserData.class);
 		
 		r = context.getResources();
 		preferences = context.getSharedPreferences(r.getString(R.string.preferences_file), Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = preferences.edit();
 		
-		Log.d(TAG, "Set preference: applicationId: " + userResponse.getUuid());
-		editor.putString("applicationId", userResponse.getUuid());
+		Log.d(TAG, "Set preference: applicationId: " + userData.getUuid());
+		editor.putString("applicationId", userData.getUuid());
 		editor.commit();
 	}
 

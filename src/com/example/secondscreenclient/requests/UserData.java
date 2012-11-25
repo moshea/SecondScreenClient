@@ -1,7 +1,7 @@
 package com.example.secondscreenclient.requests;
 import com.google.gson.annotations.Expose;
 
-public class UserResponse {
+public class UserData {
 	@Expose
 	private String uuid;
 

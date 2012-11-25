@@ -3,4 +3,12 @@
         android:title="@string/menu_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    
+    <item android:id="@+id/menu_on_now"
+          android:title="@string/menu_on_now"
+          android:showAsAction="ifRoom"/>
+    
+    <item android:id="@+id/menu_channels"
+          android:title="@string/menu_channels"
+          android:showAsAction="ifRoom"/>
 </menu>
