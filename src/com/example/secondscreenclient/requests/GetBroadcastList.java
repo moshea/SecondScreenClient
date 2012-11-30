@@ -1,6 +1,9 @@
 package com.example.secondscreenclient.requests;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
 
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.model.Broadcast;
@@ -15,11 +18,11 @@ import android.support.v4.content.LocalBroadcastManager;
 
 public class GetBroadcastList extends AsyncTask<Void, Void, String> {
 	
-	private static final String TAG = "GetBroadcastList";
+	private static final String TAG = GetBroadcastList.class.getSimpleName();
 	private Context context;
 	private BroadcastList broadcastList;
-	// this stores a string, but is set by using a R.string int in the setter method.
-	private int method;
+	private ArrayList<String> pathList;
+	List<NameValuePair> params;
 	
 	public GetBroadcastList(Context context, BroadcastList broadcastList){
 		this.context = context;
@@ -27,14 +30,10 @@ public class GetBroadcastList extends AsyncTask<Void, Void, String> {
 	}
 
 	@Override
-	protected String doInBackground(Void... params) {
+	protected String doInBackground(Void... p) {
 		Server server = new Server(context);
-		
-		ArrayList<String> pathList = new ArrayList<String>();
-		pathList.add(context.getString(R.string.api_broadcasts));
-		pathList.add(context.getString(method));
 
-		return server.getRequest(pathList, null);
+		return server.getRequest(pathList, params);
 	}
 	
 	/*
@@ -43,15 +42,18 @@ public class GetBroadcastList extends AsyncTask<Void, Void, String> {
 	 * Once the response comes back from the server, create a list o
 	 */
 	protected void onPostExecute(String response){
-		Broadcast[] broadcastData = new Gson().fromJson(response, Broadcast[].class);
-		broadcastList.setNow(broadcastData);
-		Intent intent = new Intent("updateNowBroadcastList");
+		Broadcast[] broadcasts = new Gson().fromJson(response, Broadcast[].class);
+		broadcastList.setBroadcastList(broadcasts);
+		Intent intent = new Intent("updateBroadcastList");
 		LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
 		lbm.sendBroadcast(intent);
 	}
 	
-	public void setMethod(int method){
-		this.method = method;
+	public void setPath(ArrayList<String> pathList){
+		this.pathList = pathList;
+	}
+	public void setParams(List<NameValuePair> params){
+		this.params = params;
 	}
 
 }

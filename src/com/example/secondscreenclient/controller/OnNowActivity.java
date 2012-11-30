@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.model.Broadcast;
 import com.example.secondscreenclient.model.BroadcastList;
+import com.example.secondscreenclient.model.Channel;
 import com.example.secondscreenclient.view.BroadcastListAdapter;
 
 /*
@@ -22,15 +23,15 @@ import com.example.secondscreenclient.view.BroadcastListAdapter;
  */
 public class OnNowActivity extends MenuActivity{
 	
-	private static final String TAG = "OnNowActivity";
+	private static final String TAG = OnNowActivity.class.getSimpleName();
 	BroadcastList broadcastList;
 	BroadcastListAdapter adapter;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
-    	Log.d(TAG, "Creating OnNowActivity");
+    	Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
-        
+
         // reusing the main activity layout here, as its similar to
         // the broadcast list layout.
         setContentView(R.layout.activity_main);
@@ -41,13 +42,21 @@ public class OnNowActivity extends MenuActivity{
         setListAdapter(adapter);
         
         LocalBroadcastManager.getInstance(this).registerReceiver(
-        		messageReciever, new IntentFilter("updateNowBroadcastList"));
+        		messageReciever, new IntentFilter("updateBroadcastList"));
         
         // important to get the broadcast list from the server after the
         // adapter has being set and the listener set up, otherwise, broadcastList could be populated
         // but no adapter to update to view would exist
         broadcastList = new BroadcastList(this);
-        broadcastList.getNow();
+        Bundle extras = getIntent().getExtras();
+        
+        if((extras != null) && extras.containsKey("channel")){
+        	Channel channel = (Channel) getIntent().getExtras().get("channel");
+        	channel.setContext(this);
+        	channel.getBroadcasts(broadcastList);
+        }else{
+            broadcastList.getNow();
+        }
     }
 	
 	private BroadcastReceiver messageReciever = new BroadcastReceiver(){
@@ -55,7 +64,7 @@ public class OnNowActivity extends MenuActivity{
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			if(action == "updateNowBroadcastList"){
+			if(action == "updateBroadcastList"){
 				Log.d(TAG, "About to update broadcast list");
 				adapter.updateEntries(broadcastList.getNow());
 			}

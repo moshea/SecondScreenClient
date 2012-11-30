@@ -1,5 +1,7 @@
 package com.example.secondscreenclient.model;
 
+import java.util.ArrayList;
+
 import com.example.secondscreenclient.requests.GetBroadcastList;
 
 import com.example.secondscreenclient.R;
@@ -8,7 +10,7 @@ import android.content.Context;
 public class BroadcastList {
 	
 	Context context;
-	Broadcast[] broadcastDataNow;
+	Broadcast[] broadcastList;
 	
 	public BroadcastList(Context context){
 		this.context = context;
@@ -17,19 +19,42 @@ public class BroadcastList {
 	public Broadcast[] getNow(){
 		Broadcast[] data;
 		
-		if(broadcastDataNow == null){
+		if(broadcastList == null){
 			GetBroadcastList getBroadcastList = new GetBroadcastList(context, this);
-			getBroadcastList.setMethod(R.string.api_method_now);
+			ArrayList<String> pathList = new ArrayList<String>();
+			pathList.add("broadcasts");
+			pathList.add("now");
+			
+			getBroadcastList.setPath(pathList);
 			getBroadcastList.execute();
 			data = null;
 		} else {
-			data = broadcastDataNow;
+			data = broadcastList;
 		}
 		return data;
 	}
 	
-	public void setNow(Broadcast[] broadcastDataNow){
-		this.broadcastDataNow = broadcastDataNow;
+	public Broadcast[] fromChannel(Channel channel){
+		Broadcast[] data;
+		
+		if(broadcastList == null){
+			GetBroadcastList getBroadcastList = new GetBroadcastList(context, this);
+			ArrayList<String> pathList = new ArrayList<String>();
+			pathList.add("channels");
+			pathList.add(channel.getId());
+			pathList.add("broadcasts");
+
+			getBroadcastList.setPath(pathList);
+			getBroadcastList.execute();
+			data = null;
+		} else {
+			data = broadcastList;
+		}
+		return data;
+	}
+	
+	public void setBroadcastList(Broadcast[] broadcastList){
+		this.broadcastList = broadcastList;
 	}
 
 }

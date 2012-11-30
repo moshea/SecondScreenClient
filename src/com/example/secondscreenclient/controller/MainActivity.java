@@ -1,6 +1,7 @@
 package com.example.secondscreenclient.controller;
 
 import com.example.secondscreenclient.R;
+import com.example.secondscreenclient.model.Channel;
 import com.example.secondscreenclient.model.ChannelList;
 import com.example.secondscreenclient.model.User;
 import com.example.secondscreenclient.view.ChannelListAdapter;
@@ -12,6 +13,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 /* 
  * MainActivity is extending MenuActivity, which in turn extends ListActivity.
@@ -42,6 +46,8 @@ public class MainActivity extends MenuActivity{
         // it will go to the server to get it.
         user.getApplicationId();
         channelList.getList();
+        
+        this.getListView().setOnItemClickListener(onItemClickListener);
     }
     
     private BroadcastReceiver messageReciever = new BroadcastReceiver(){
@@ -55,5 +61,20 @@ public class MainActivity extends MenuActivity{
 			}
 		}
 		
+    };
+    
+    private OnItemClickListener onItemClickListener = new OnItemClickListener(){
+
+		@Override
+		public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
+			Log.d(TAG, "List item clicked: " + position);
+			
+			Channel channel = (Channel) adapter.getAdapter().getItem(position);
+			Intent intent = new Intent(view.getContext(), OnNowActivity.class);
+			intent.putExtra("channel", channel);
+			startActivity(intent);
+			
+		}
+    	
     };
 }
