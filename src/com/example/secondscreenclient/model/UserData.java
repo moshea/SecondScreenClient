@@ -1,4 +1,4 @@
-package com.example.secondscreenclient.requests;
+package com.example.secondscreenclient.model;
 import com.google.gson.annotations.Expose;
 
 public class UserData {

@@ -27,6 +27,7 @@
         <activity android:name=".controller.OnNowActivity">
             <action android:name="android.intent.action.ONNOW" />
         </activity>
+        <activity android:name=".controller.BroadcastActivity"></activity>
     </application>
 
 </manifest>

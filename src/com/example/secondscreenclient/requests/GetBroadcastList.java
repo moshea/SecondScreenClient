@@ -3,6 +3,7 @@ package com.example.secondscreenclient.requests;
 import java.util.ArrayList;
 
 import com.example.secondscreenclient.R;
+import com.example.secondscreenclient.model.BroadcastData;
 import com.example.secondscreenclient.model.BroadcastList;
 import com.google.gson.Gson;
 

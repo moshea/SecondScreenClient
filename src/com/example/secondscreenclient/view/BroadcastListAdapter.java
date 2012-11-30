@@ -3,13 +3,15 @@ package com.example.secondscreenclient.view;
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.R.id;
 import com.example.secondscreenclient.R.layout;
-import com.example.secondscreenclient.requests.BroadcastData;
-import com.example.secondscreenclient.requests.ChannelData;
+import com.example.secondscreenclient.model.BroadcastData;
+import com.example.secondscreenclient.model.ChannelData;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;

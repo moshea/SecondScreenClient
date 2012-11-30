@@ -9,6 +9,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.model.AndroidPhone;
+import com.example.secondscreenclient.model.UserData;
 import com.google.gson.Gson;
 
 import android.content.Context;

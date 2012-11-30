@@ -1,6 +1,5 @@
 package com.example.secondscreenclient.model;
 
-import com.example.secondscreenclient.requests.ChannelData;
 import com.example.secondscreenclient.requests.GetChannelList;
 
 import android.content.Context;

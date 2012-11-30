@@ -7,13 +7,14 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.secondscreenclient.R;
+import com.example.secondscreenclient.model.BroadcastData;
 import com.example.secondscreenclient.model.BroadcastList;
-import com.example.secondscreenclient.model.ChannelList;
-import com.example.secondscreenclient.model.User;
 import com.example.secondscreenclient.view.BroadcastListAdapter;
-import com.example.secondscreenclient.view.ChannelListAdapter;
 
 /*
  * OnNow activity should display broadcasts that are currently running
@@ -33,8 +34,12 @@ public class OnNowActivity extends MenuActivity{
         // reusing the main activity layout here, as its similar to
         // the broadcast list layout.
         setContentView(R.layout.activity_main);
+        
+        this.getListView().setOnItemClickListener(onItemClickListener);
+        
         adapter = new BroadcastListAdapter(this);
         setListAdapter(adapter);
+        
         LocalBroadcastManager.getInstance(this).registerReceiver(
         		messageReciever, new IntentFilter("updateNowBroadcastList"));
         
@@ -56,6 +61,21 @@ public class OnNowActivity extends MenuActivity{
 			}
 		}
 		
+    };
+    
+    private OnItemClickListener onItemClickListener = new OnItemClickListener(){
+
+		@Override
+		public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
+			Log.d(TAG, "List item clicked: " + position);
+			
+			BroadcastData broadcastData = (BroadcastData) adapter.getAdapter().getItem(position);
+			Log.d(TAG, "BroadcastData uuid: " + broadcastData.getUuid());
+			Intent intent = new Intent(view.getContext(), BroadcastActivity.class);
+			intent.putExtra("broadcastData", broadcastData);
+			startActivity(intent);
+		}
+    	
     };
 
 }

@@ -3,7 +3,7 @@ package com.example.secondscreenclient.view;
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.R.id;
 import com.example.secondscreenclient.R.layout;
-import com.example.secondscreenclient.requests.ChannelData;
+import com.example.secondscreenclient.model.ChannelData;
 
 import android.content.Context;
 import android.util.Log;

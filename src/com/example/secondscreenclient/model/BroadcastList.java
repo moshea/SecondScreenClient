@@ -1,6 +1,5 @@
 package com.example.secondscreenclient.model;
 
-import com.example.secondscreenclient.requests.BroadcastData;
 import com.example.secondscreenclient.requests.GetBroadcastList;
 
 import com.example.secondscreenclient.R;

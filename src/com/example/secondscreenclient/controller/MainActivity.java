@@ -38,7 +38,8 @@ public class MainActivity extends MenuActivity{
         setContentView(R.layout.activity_main);
         adapter = new ChannelListAdapter(this);
         setListAdapter(adapter);
-
+        // Load up the application id. if this is a first app start,
+        // it will go to the server to get it.
         user.getApplicationId();
         channelList.getList();
     }
