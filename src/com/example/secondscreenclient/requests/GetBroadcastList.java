@@ -3,7 +3,7 @@ package com.example.secondscreenclient.requests;
 import java.util.ArrayList;
 
 import com.example.secondscreenclient.R;
-import com.example.secondscreenclient.model.BroadcastData;
+import com.example.secondscreenclient.model.Broadcast;
 import com.example.secondscreenclient.model.BroadcastList;
 import com.google.gson.Gson;
 
@@ -43,7 +43,7 @@ public class GetBroadcastList extends AsyncTask<Void, Void, String> {
 	 * Once the response comes back from the server, create a list o
 	 */
 	protected void onPostExecute(String response){
-		BroadcastData[] broadcastData = new Gson().fromJson(response, BroadcastData[].class);
+		Broadcast[] broadcastData = new Gson().fromJson(response, Broadcast[].class);
 		broadcastList.setNow(broadcastData);
 		Intent intent = new Intent("updateNowBroadcastList");
 		LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);

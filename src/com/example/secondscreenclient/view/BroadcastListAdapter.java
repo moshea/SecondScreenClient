@@ -3,8 +3,8 @@ package com.example.secondscreenclient.view;
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.R.id;
 import com.example.secondscreenclient.R.layout;
-import com.example.secondscreenclient.model.BroadcastData;
-import com.example.secondscreenclient.model.ChannelData;
+import com.example.secondscreenclient.model.Broadcast;
+import com.example.secondscreenclient.model.Channel;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,7 +22,7 @@ public class BroadcastListAdapter extends BaseAdapter {
 	private static final String TAG = "BroadcastListAdapter";
 	private Context context;
 	private LayoutInflater layoutInflater;
-	private BroadcastData[] entries;
+	private Broadcast[] entries;
 	
 	public BroadcastListAdapter(Context context){
 		this.context = context;
@@ -75,7 +75,7 @@ public class BroadcastListAdapter extends BaseAdapter {
 		return broadcastView;
 	}
 	
-	public void updateEntries(BroadcastData[] entries){
+	public void updateEntries(Broadcast[] entries){
 		this.entries = entries;
 		notifyDataSetChanged();
 	}

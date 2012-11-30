@@ -8,14 +8,14 @@ import android.content.Context;
 public class BroadcastList {
 	
 	Context context;
-	BroadcastData[] broadcastDataNow;
+	Broadcast[] broadcastDataNow;
 	
 	public BroadcastList(Context context){
 		this.context = context;
 	}
 	
-	public BroadcastData[] getNow(){
-		BroadcastData[] data;
+	public Broadcast[] getNow(){
+		Broadcast[] data;
 		
 		if(broadcastDataNow == null){
 			GetBroadcastList getBroadcastList = new GetBroadcastList(context, this);
@@ -28,7 +28,7 @@ public class BroadcastList {
 		return data;
 	}
 	
-	public void setNow(BroadcastData[] broadcastDataNow){
+	public void setNow(Broadcast[] broadcastDataNow){
 		this.broadcastDataNow = broadcastDataNow;
 	}
 

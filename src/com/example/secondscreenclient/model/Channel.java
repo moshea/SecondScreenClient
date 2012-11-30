@@ -1,7 +1,7 @@
 package com.example.secondscreenclient.model;
 import com.google.gson.annotations.Expose;
 
-public class ChannelData {
+public class Channel {
 	@Expose
 	private String id;
 	@Expose

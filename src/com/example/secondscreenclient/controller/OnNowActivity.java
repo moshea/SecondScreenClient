@@ -12,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.example.secondscreenclient.R;
-import com.example.secondscreenclient.model.BroadcastData;
+import com.example.secondscreenclient.model.Broadcast;
 import com.example.secondscreenclient.model.BroadcastList;
 import com.example.secondscreenclient.view.BroadcastListAdapter;
 
@@ -69,10 +69,10 @@ public class OnNowActivity extends MenuActivity{
 		public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
 			Log.d(TAG, "List item clicked: " + position);
 			
-			BroadcastData broadcastData = (BroadcastData) adapter.getAdapter().getItem(position);
-			Log.d(TAG, "BroadcastData uuid: " + broadcastData.getUuid());
+			Broadcast broadcast = (Broadcast) adapter.getAdapter().getItem(position);
+			Log.d(TAG, "BroadcastData uuid: " + broadcast.getUuid());
 			Intent intent = new Intent(view.getContext(), BroadcastActivity.class);
-			intent.putExtra("broadcastData", broadcastData);
+			intent.putExtra("broadcast", broadcast);
 			startActivity(intent);
 		}
     	

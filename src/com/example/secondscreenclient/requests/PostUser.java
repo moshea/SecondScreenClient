@@ -3,13 +3,12 @@ package com.example.secondscreenclient.requests;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.model.AndroidPhone;
-import com.example.secondscreenclient.model.UserData;
+import com.example.secondscreenclient.model.User;
 import com.google.gson.Gson;
 
 import android.content.Context;
@@ -56,14 +55,14 @@ public class PostUser extends AsyncTask<Void, Void, String> {
 	 * application id. Store this locally, so we can use it elsewhere
 	 */
 	protected void onPostExecute(String response){
-		UserData userData = new Gson().fromJson(response, UserData.class);
+		User user = new Gson().fromJson(response, User.class);
 		
 		r = context.getResources();
 		preferences = context.getSharedPreferences(r.getString(R.string.preferences_file), Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = preferences.edit();
 		
-		Log.d(TAG, "Set preference: applicationId: " + userData.getUuid());
-		editor.putString("applicationId", userData.getUuid());
+		Log.d(TAG, "Set preference: applicationId: " + user.getUuid());
+		editor.putString("applicationId", user.getUuid());
 		editor.commit();
 	}
 

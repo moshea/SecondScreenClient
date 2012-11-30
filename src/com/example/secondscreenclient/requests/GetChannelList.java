@@ -3,7 +3,7 @@ package com.example.secondscreenclient.requests;
 import java.util.ArrayList;
 
 import com.example.secondscreenclient.R;
-import com.example.secondscreenclient.model.ChannelData;
+import com.example.secondscreenclient.model.Channel;
 import com.example.secondscreenclient.model.ChannelList;
 import com.google.gson.Gson;
 
@@ -32,7 +32,7 @@ public class GetChannelList extends AsyncTask<Void, Void, String> {
 	}
 	
 	protected void onPostExecute(String response){
-		ChannelData[] channelData = new Gson().fromJson(response, ChannelData[].class);
+		Channel[] channelData = new Gson().fromJson(response, Channel[].class);
 		channelList.setData(channelData);
 		Intent intent = new Intent("updateChannelList");
 		LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);

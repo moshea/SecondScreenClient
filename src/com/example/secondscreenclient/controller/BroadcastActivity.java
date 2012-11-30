@@ -2,7 +2,7 @@ package com.example.secondscreenclient.controller;
 
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.model.Broadcast;
-import com.example.secondscreenclient.model.BroadcastData;
+import com.example.secondscreenclient.model.Broadcast;
 import com.example.secondscreenclient.view.ChannelListAdapter;
 
 import android.app.Activity;
@@ -20,8 +20,7 @@ public class BroadcastActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    
-	    BroadcastData broadcastData = (BroadcastData) getIntent().getExtras().get("broadcastData");
-	    Broadcast broadcast = new Broadcast(this, broadcastData);
+	    Broadcast broadcast = (Broadcast) getIntent().getExtras().get("broadcast");
 
 	    setContentView(R.layout.broadcast_activity);
 	    
@@ -29,9 +28,9 @@ public class BroadcastActivity extends Activity {
 	    TextView subtitleText = (TextView) findViewById(R.id.subtitle);
 	    TextView synopsisText = (TextView) findViewById(R.id.synopsis);
 	    
-	    titleText.setText(broadcast.getInfo().getTitle());
-	    subtitleText.setText(broadcast.getInfo().getSubtitle());
-	    synopsisText.setText(broadcast.getInfo().getSynopsis());
+	    titleText.setText(broadcast.getTitle());
+	    subtitleText.setText(broadcast.getSubtitle());
+	    synopsisText.setText(broadcast.getSynopsis());
 	}
 
 }

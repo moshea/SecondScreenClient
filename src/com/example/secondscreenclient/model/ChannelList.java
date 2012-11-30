@@ -9,7 +9,7 @@ public class ChannelList {
 	
 	private static final String TAG = "ChannelList";
 	private Context context;
-	private ChannelData[] data;
+	private Channel[] data;
 	
 	public ChannelList(Context context){
 		this.context = context;
@@ -19,8 +19,8 @@ public class ChannelList {
 	 * getList will retrieve the channel list from the server
 	 * TODO: implement local cache clearing after a certain time limit
 	 */
-	public ChannelData[] getList(){
-		ChannelData[] channelData;
+	public Channel[] getList(){
+		Channel[] channelData;
 		if(data == null){
 			Log.d(TAG, "Getting a new channel list from server");
 			GetChannelList getChannelList = new GetChannelList(context, this);
@@ -36,7 +36,7 @@ public class ChannelList {
 	 * we only need a setter for data, as the data should
 	 * be read from getList, instead of getData.
 	 */
-	public void setData(ChannelData[] data){
+	public void setData(Channel[] data){
 		this.data = data;
 	}
 

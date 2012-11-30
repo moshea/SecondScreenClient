@@ -3,7 +3,7 @@ package com.example.secondscreenclient.view;
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.R.id;
 import com.example.secondscreenclient.R.layout;
-import com.example.secondscreenclient.model.ChannelData;
+import com.example.secondscreenclient.model.Channel;
 
 import android.content.Context;
 import android.util.Log;
@@ -19,7 +19,7 @@ public class ChannelListAdapter extends BaseAdapter {
 	private static final String TAG = "ChannelListAdapter";
 	private Context context;
 	private LayoutInflater layoutInflater;
-	private ChannelData[] entries;
+	private Channel[] entries;
 	
 	public ChannelListAdapter(Context context){
 		this.context = context;
@@ -65,7 +65,7 @@ public class ChannelListAdapter extends BaseAdapter {
 		return channelView;
 	}
 	
-	public void updateEntries(ChannelData[] entries){
+	public void updateEntries(Channel[] entries){
 		this.entries = entries;
 		notifyDataSetChanged();
 	}
