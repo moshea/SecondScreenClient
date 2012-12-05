@@ -21,9 +21,9 @@ import com.example.secondscreenclient.view.BroadcastListAdapter;
  * OnNow activity should display broadcasts that are currently running
  * Useful for finding shows that are on right now
  */
-public class OnNowActivity extends MenuActivity{
+public class BroadcastsActivity extends MenuActivity{
 	
-	private static final String TAG = OnNowActivity.class.getSimpleName();
+	private static final String TAG = BroadcastsActivity.class.getSimpleName();
 	BroadcastList broadcastList;
 	BroadcastListAdapter adapter;
 	

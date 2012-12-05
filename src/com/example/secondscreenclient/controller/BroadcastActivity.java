@@ -2,13 +2,10 @@ package com.example.secondscreenclient.controller;
 
 import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.model.Broadcast;
-import com.example.secondscreenclient.model.Broadcast;
-import com.example.secondscreenclient.view.ChannelListAdapter;
 
 import android.app.Activity;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.widget.TextView;
 
 public class BroadcastActivity extends Activity {
@@ -18,6 +15,7 @@ public class BroadcastActivity extends Activity {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Log.d(TAG, "onCreate");
 	    super.onCreate(savedInstanceState);
 	    
 	    Broadcast broadcast = (Broadcast) getIntent().getExtras().get("broadcast");

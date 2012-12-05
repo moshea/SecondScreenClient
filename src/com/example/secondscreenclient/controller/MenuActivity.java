@@ -23,7 +23,7 @@ public class MenuActivity extends ListActivity{
     	switch(item.getItemId()){
     		case R.id.menu_on_now:
     			Log.d(TAG, "On Now menu pressed");
-    			Intent intent = new Intent(this, OnNowActivity.class);
+    			Intent intent = new Intent(this, BroadcastsActivity.class);
     			startActivity(intent);
     			return true;
     			

@@ -4,6 +4,8 @@ import com.example.secondscreenclient.R;
 import com.example.secondscreenclient.R.id;
 import com.example.secondscreenclient.R.layout;
 import com.example.secondscreenclient.model.Channel;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,10 +23,13 @@ public class ChannelListAdapter extends BaseAdapter {
 	private Context context;
 	private LayoutInflater layoutInflater;
 	private Channel[] entries;
+	private ImageLoader imageLoader;
 	
 	public ChannelListAdapter(Context context){
 		this.context = context;
 		layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		imageLoader = ImageLoader.getInstance();
+		imageLoader.init(ImageLoaderConfiguration.createDefault(this.context));
 	}
 
 	@Override
@@ -60,8 +66,12 @@ public class ChannelListAdapter extends BaseAdapter {
 		}
 		
 		TextView nameText = (TextView) channelView.findViewById(R.id.channel_name);
+		ImageView channelLogo = (ImageView) channelView.findViewById(R.id.channel_logo);
 		Log.d(TAG, "nameText: " + entries[position].getName());
+		Log.d(TAG, "imageUrl: " + entries[position].getLogoUrl());
+		
 		nameText.setText(entries[position].getName());
+		imageLoader.displayImage(entries[position].getLogoUrl(), channelLogo);
 		return channelView;
 	}
 	

@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".controller.OnNowActivity">
+        <activity android:name=".controller.BroadcastsActivity">
             <action android:name="android.intent.action.ONNOW" />
         </activity>
         <activity android:name=".controller.BroadcastActivity"></activity>

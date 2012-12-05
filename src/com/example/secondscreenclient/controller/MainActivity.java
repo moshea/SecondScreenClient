@@ -70,7 +70,7 @@ public class MainActivity extends MenuActivity{
 			Log.d(TAG, "List item clicked: " + position);
 			
 			Channel channel = (Channel) adapter.getAdapter().getItem(position);
-			Intent intent = new Intent(view.getContext(), OnNowActivity.class);
+			Intent intent = new Intent(view.getContext(), BroadcastsActivity.class);
 			intent.putExtra("channel", channel);
 			startActivity(intent);
 			
