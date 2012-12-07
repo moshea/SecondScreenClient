@@ -8,12 +8,15 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/ic_launcher"
+        android:paddingLeft="5dp"
         android:contentDescription="channel logo" />
         
     <TextView
         android:id="@+id/channel_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/channel_logo"
+        android:paddingLeft="10dp"
         android:text=""
         android:textSize="16sp"
         android:textStyle="bold" />

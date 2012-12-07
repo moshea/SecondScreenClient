@@ -37,7 +37,6 @@ public class GetChannelList extends AsyncTask<Void, Void, String> {
 		Intent intent = new Intent("updateChannelList");
 		LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
 		lbm.sendBroadcast(intent);
-
 	}
 
 }
