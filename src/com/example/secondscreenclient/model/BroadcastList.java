@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.example.secondscreenclient.requests.GetBroadcastList;
 
-import com.example.secondscreenclient.R;
 import android.content.Context;
 
 public class BroadcastList {
