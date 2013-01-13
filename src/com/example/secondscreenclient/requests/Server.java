@@ -8,9 +8,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpStatus;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
@@ -83,7 +85,7 @@ public class Server {
 	 * params can be set to null, if there isn't a query to add
 	 * 
 	 */
-	public String getRequest(ArrayList<String> pathList, List<NameValuePair> params){
+	public String getRequest(ArrayList<String> pathList, List<NameValuePair> params) throws HttpStatusException{
 		HttpResponse response = null;
 		builder = getBuilder();
 		appendPath(pathList);
@@ -99,14 +101,19 @@ public class Server {
 		
 		try {
 			response = client.execute(request);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
+			int status_code = response.getStatusLine().getStatusCode();
+			if(status_code != HttpStatus.SC_OK){
+				throw new HttpStatusException(Integer.toString(status_code));
+			}
+		} catch(HttpStatusException e){
 			e.printStackTrace();
-		} catch (IOException e) {
+			throw e;
+		} catch(ClientProtocolException e) {
+			e.printStackTrace();
+		} catch(IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return processReponse(response);
 	}
 	

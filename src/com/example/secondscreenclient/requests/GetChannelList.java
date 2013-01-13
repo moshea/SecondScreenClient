@@ -28,15 +28,33 @@ public class GetChannelList extends AsyncTask<Void, Void, String> {
 		ArrayList<String> pathList = new ArrayList<String>();
 		pathList.add(context.getString(R.string.api_channels));
 
-		return server.getRequest(pathList, null);
+		String response = null;
+		try{
+			response = server.getRequest(pathList, null);
+		}catch(HttpStatusException e){
+			response = null;
+		}
+		return response;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
+	 * @param response - the json response string from the server
+	 * if the response string is null, we need to do a UI update to handle that
+	 */
 	protected void onPostExecute(String response){
-		Channel[] channelData = new Gson().fromJson(response, Channel[].class);
-		channelList.setData(channelData);
-		Intent intent = new Intent("updateChannelList");
-		LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
-		lbm.sendBroadcast(intent);
+		if(response != null){
+			Channel[] channelData = new Gson().fromJson(response, Channel[].class);
+			channelList.setData(channelData);
+			Intent intent = new Intent("updateChannelList");
+			LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
+			lbm.sendBroadcast(intent);
+		}else{
+			/*
+			 * TODO: do something here if it all goes wrong!
+			 */
+		}
 	}
 
 }

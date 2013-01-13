@@ -50,10 +50,8 @@ public class StatusListAdapter extends BaseAdapter {
 		RelativeLayout statusView;
 		Log.v(TAG, "Finding the view");
 		if(convertView == null){
-			Log.v(TAG, "convertView is null");
 			statusView = (RelativeLayout) layoutInflater.inflate(R.layout.status_item, parent, false);
 		} else {
-			Log.v(TAG, "convertView is not null");
 			statusView = (RelativeLayout) convertView;
 		}
 		
@@ -62,8 +60,8 @@ public class StatusListAdapter extends BaseAdapter {
 		Log.d(TAG, "statusText: " + entries[position].getText());
 		Log.d(TAG, "userText: " + entries[position].getUser());
 		
-		statusText.setText(entries[position].getText());
 		userText.setText(entries[position].getUser());
+		statusText.setText(entries[position].getText());
 		return statusView;
 	}
 	

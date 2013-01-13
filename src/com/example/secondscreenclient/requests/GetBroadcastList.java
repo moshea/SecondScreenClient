@@ -32,8 +32,14 @@ public class GetBroadcastList extends AsyncTask<Void, Void, String> {
 	@Override
 	protected String doInBackground(Void... p) {
 		Server server = new Server(context);
+		String response = null;
 
-		return server.getRequest(pathList, params);
+		try{
+			response = server.getRequest(pathList, params);
+		}catch(HttpStatusException e){
+			response = null;
+		}
+		return response;
 	}
 	
 	/*
@@ -42,11 +48,16 @@ public class GetBroadcastList extends AsyncTask<Void, Void, String> {
 	 * Once the response comes back from the server, create a list o
 	 */
 	protected void onPostExecute(String response){
-		Broadcast[] broadcasts = new Gson().fromJson(response, Broadcast[].class);
-		broadcastList.setBroadcastList(broadcasts);
-		Intent intent = new Intent("updateBroadcastList");
-		LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
-		lbm.sendBroadcast(intent);
+		if(response != null){
+			Broadcast[] broadcasts = new Gson().fromJson(response, Broadcast[].class);
+			broadcastList.setBroadcastList(broadcasts);
+			Intent intent = new Intent("updateBroadcastList");
+			LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(context);
+			lbm.sendBroadcast(intent);
+		}else{
+			// TODO: something!
+		}
+		
 	}
 	
 	public void setPath(ArrayList<String> pathList){

@@ -40,6 +40,7 @@ public class Status {
 	}
 
 	public void setText(String text) {
+		Log.v(TAG, "Setting text as: " + text);
 		this.text = text;
 	}
 
@@ -48,6 +49,7 @@ public class Status {
 	}
 
 	public void setUser(String user) {
+		Log.v(TAG, "Setting user as: " + user);
 		this.user = user;
 	}
 
